@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+</head>
+<body>
+<h1 id="tipps-zur-installation-der-entwicklungsumgebung-zur-vorlesung">Tipps zur Installation der Entwicklungsumgebung zur Vorlesung</h1>
+<p>Prof. Dr. Thomas Köller – Hochschule Karlsruhe</p>
+<p>Im Rahmen der Vorlesung werden Simulationsaufgaben mit Python oder einer Kombination aus Python und OpenModelica gelöst. Vermutlich möchten viele von Ihnen die in der Vorlesung benutzte Software auf ihrem eigenen Laptop installieren. Nachfolgend finden Sie eine ausführliche Installationsanleitung.</p>
+<p>Unter <a href="https://bwsyncandshare.kit.edu/s/p6TagxcYkL2y6ZJ" class="uri">https://bwsyncandshare.kit.edu/s/p6TagxcYkL2y6ZJ</a> finden Sie das neueste Environment zur Vorlesung.</p>
+<h2 id="linux">Linux</h2>
+<p>Bei dem heruntergeladenen Environment handelt es sich um ein <code>rootfs</code> (Root Filesystem), das unter Linux direkt verwendet werden kann. Eine Installation ist nicht erforderlich.</p>
+<ul>
+<li>Erstellen Sie in einem beliebigen Verzeichnis ein Unterverzeichnis mit dem Namen <code>rootfs</code> und entpacken Sie die heruntergeladene <code>.tar</code>-Datei in diesem Verzeichnis.</li>
+<li>Editieren Sie die Datei <code>enter.sh</code> und ersetzen Sie xy mit Ihrem Usernamen.</li>
+<li>Beim ersten Aufruf des Enterskripts wird in Ihrem Homeverzeichnis ein Verzeichnis <code>Dokumente/modsimdata</code> erstellt. Dieses wird in Ihr <code>rootfs</code> unter <code>/home/Users/modsim/Dokumente/modsimdata_extern</code> gemountet. Dieses Verzeichnis können Sie als Arbeitsverzeichnis für die Veranstaltung nutzen.</li>
+<li>Für die beiden benutzten Programme gibt es Shortcuts <code>om</code>, bzw. <code>spy</code>.</li>
+</ul>
+<h2 id="windows">Windows</h2>
+<p>Bei dem heruntergeladenen Environment handelt es sich um ein <code>rootfs</code> (Root Filesystem), das unter Windows mit wsl (Windows Subsystem für Linux) genutzt werden kann.</p>
+<p>Einbinden unter Windows:</p>
+<ul>
+<li>Erstellen Sie zunächst ein Verzeichnis <code>C:\WSL\ModSim</code>.</li>
+<li>Öffnen Sie die Powershell im Downloadverzeichnis mit admin-Rechten und installieren Sie wsl (<code>wsl.exe --install</code>, anschließend Rechner neu starten.)</li>
+<li>Öffnen Sie die Powershell im Downloadverzeichnis mit admin-Rechten und geben Sie folgendes ein: <code>wsl --import ModSim C:\WSL\ModSim modsimenvxy.tar</code> (<code>xy</code> durch die Versionsnummer ersetzen.)</li>
+<li>Durch die Eingabe <code>wsl -d ModSim</code> in der Powershell startet das <code>rootfs</code> im User <code>modsim</code>. Die Windowslaufwerke werden unter <code>/mnt/c, /mnt/d</code> oder <code>/mnt/n</code> (Netzlaufwerk in der Hochschule) gemountet. Sie können deshalb an beliebiger Stelle ein Arbeitsverzeichnis erstellen. Vermeiden Sie aber bitte Sonderzeichen.</li>
+<li>Für die beiden benutzten Programme gibt es Shortcuts <code>om</code>, bzw. <code>spy</code>.</li>
+</ul>
+<h2 id="test-der-installation">Test der Installation</h2>
+<p>Testen Sie Ihre Installation wie folgt:</p>
+<ul>
+<li><code>spy</code> eingeben und die Datei /home/modsim/Dokumente/testmodsim/pt1_step.py öffnen.</li>
+<li><code>F5</code> zum Ausführen des Skripts drücken.</li>
+<li>Im Reiter <code>Plots</code> sollte die Sprungantwort eines PT1-Gliedes erscheinen.</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,2 @@
+﻿  ÜbungSDL.cpp
+C:\Users\chris\source\repos\ÜbungSDL\ÜbungSDL\ÜbungSDL.cpp(2,10): error C1083: Datei (Include) kann nicht geöffnet werden: "SDL3/SDL.h": No such file or directory
