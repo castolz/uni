@@ -15,7 +15,7 @@ l = 1
 phi_0 = np.pi/4
 
 t_max = 5 
-t = np.linspace(0, t_max, 101)
+t = np.linspace(0, t_max, 1001)
 
 def xdot_fkt(t, x, *args):
     xdot = [x[1], -(g/l)*x[0]]

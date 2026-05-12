@@ -1,0 +1,27 @@
+Sommersemester 2026:
+Herzlich Willkommen bei der Veranstaltung: Modellbildung und Simulation
+Nachfolgend finden Sie einige Informationen:
+
+Die Veranstaltung findet statt im Raum: LI027
+
+Die Vorlesung findet im 14-tägigen Wechsel (Gruppe A&B im Wechsel) in Präsenz statt. 
+
+Bitte treten Sie entweder der Gruppe A oder der Gruppe B bei. Nachfolgend finden Sie die Veranstaltungstermine für die beiden Gruppen.
+Die Gruppengrößen sollte ungefähr gleich groß sein, ggf. findet zu Beginn der Veranstaltung eine Neuordnung statt.
+
+Am ersten Termin (17.03) brauchen nur die Mitglieder der Gruppe A kommen, für die Mitglieder der Gruppe B beginnt die Veranstaltung am 24.03.
+
+Termine:
+Gruppe A:
+Kapitel 1: 17.03, Kapitel 2: 31.03, Kapitel 3: 21.04, Kapitel 4: 05.05, Kapitel 5: 19.05, Kapitel 6: 09.06, K7 und Abschlußpräsentation: 23.06
+
+Gruppe B:
+Kapitel 1: 24.03, Kapitel 2: 14.04, Kapitel 3: 28.04, Kapitel 4: 12.05, Kapitel 5: 02.06, Kapitel 6: 16.06, K7 und Abschlußpräsentation: 30.06
+
+Bitte beachten Sie das "Merkblatt Untersagung der Aufzeichnung von digitalen Lehrveranstaltungen durch die Studierenden.pdf"
+Die Ausführungen gelten auch für die Nutzung der bereitgestellten Videos.
+
+Tipp:
+Teilweise gibt es mit dem Windowsentpacker Probleme beim Extrahieren des Skripts. 
+Tipp: Benutzen Sie 7-zip. Das Kennwort wird in der ersten Veranstaltung bekanntgegeben.
+

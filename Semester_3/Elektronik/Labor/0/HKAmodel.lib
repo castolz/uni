@@ -1,0 +1,127 @@
+* simulator lang = spice
+
+*****************************************
+* Hochschule Karlsruhe - Fakultaet EIT
+* Prof. Dr. Herman Jalli Ng (herman-jalli.ng@h-ka.de)
+* Modelle fuer verschiedene Komponente
+*****************************************
+
+*****************************************
+.subckt op1 inp inn out
+* Universal Opamp Level 1
+* Single pole opamp without voltage rails and referenced to GND
+* 
+* PINOUT ORDER  1   2   3
+* PINOUT ORDER inp inn out
+* 
+* Parameters:
+* Avol => open-loop voltage gain (V/V), default=10meg
+* GBW => gain-bandwidth product (Hz), default=100g
+* Rin => differential input resistance (ohm), default=100g
+* Rout => open-loop output resistance (ohm), default=1m
+* 
+R1 inp inn 'Rin'
+G1 0 out inp inn 'Avol/Rout'
+R2 out 0 100g
+C3 out 0 'Avol/(2*pi*GBW*Rout)'
+.param Avol=10meg
+.param GBW=100g
+.param Rin=100g
+.param Rout=1m
+.param pi=3.1415926535898
+.ends
+*****************************************
+
+*****************************************
+.subckt op2 inp inn out vcc vee
+* Universal Opamp Level 2
+* Single pole opamp with rail saturation, current consumption, current limiting, and input offset voltage
+* 
+* PINOUT ORDER  1   2   3   4   5
+* PINOUT ORDER inp inn out vcc vee
+* 
+* Parameters:
+* Avol => open-loop voltage gain (V/V), default=10meg
+* GBW => gain-bandwidth product (Hz), default=100g
+* Rin => differential input resistance (ohm), default=100g
+* Rout => open-loop output resistance (ohm), default=1m
+* Iq => quiescent supply current (A), default=1m
+* Ilimit => maximum output current (A), default=10
+* Vrail => voltage between output saturation and each rail (V), default=0
+* Vos => input offset voltage (V), default=0
+* Vmax => total maximum supply voltage between rails (V), default=50
+* 
+G1 vcc N001 N002 inn 1u
+G2 vee N001 N002 inn 1u
+R1 vcc N001 'Avol/1u'
+R2 N001 vee 'Avol/1u'
+G3 out vcc vcc N001 '1/(2*Rout)'
+G4 vee out N001 vee '1/(2*Rout)'
+R4 vcc out '2*Rout'
+R5 out vee '2*Rout'
+C1 vcc N001 '1u/(2*pi*GBW)'
+C2 N001 vee '1u/(2*pi*GBW)'
+G6 N005 vee N001 out '1/(2*Rout)'
+G5 N006 vee out N001 '1/(2*Rout)'
+R8 inn inp 'Rin'
+V6 vcc N003 'Vrail+545m'
+V7 N008 vee 'Vrail+545m'
+V8 N002 inp 'Vos'
+V9 out N007 'Ilimit-545m'
+V10 N004 out 'Ilimit-545m'
+D1 N001 N003 diode
+D2 N008 N001 diode
+D3 vcc N005 diode
+D4 vcc N006 diode
+D5 vee N005 zener
+D6 vee N006 zener
+D7 N001 N004 diode
+D8 N007 N001 diode
+I1 vcc vee 'Iq'
+.param Avol = 10meg
+.param GBW = 100g
+.param Rin = 1000g
+.param Rout = 1m
+.param Iq = 1m
+.param Ilimit = 10
+.param Vrail = 0
+.param Vos = 0
+.param Vmax = 50
+.model diode D(Is=1e-14)
+.model zener D(Is=1e-14 BV='Vmax')
+.param pi=3.1415926535898
+.ends
+*****************************************
+
+*****************************************
+* Discrete Transistors
+*****************************************
+.model BC547B NPN (IS=2.39E-14 NF=1.008 ISE=3.545E-15 NE=1.541 BF=294.3 IKF=0.1357 VAF=63.2 NR=1.004 ISC=6.272E-14 NC=1.243 BR=7.946 IKR=0.1144 VAR=25.9 RB=1 IRB=1.00E-06 RBM=1 RE=0.4683 RC=0.85 XTB=0 EG=1.11 XTI=3 CJE=1.358E-11 VJE=0.65 MJE=0.3279 TF=4.391E-10 XTF=120 VTF=2.643 ITF=0.7495 PTF=0 CJC=3.728E-12 VJC=0.3997 MJC=0.2955 XCJC=0.6193 TR=1.00E-32 CJS=0 VJS=0.75 MJS=0.333 FC=0.9579 Vceo=45 Icrating=100m mfg=Philips)
+
+.model BC547C NPN (IS=4.679E-14 NF=1.01 ISE=2.642E-15 NE=1.581 BF=458.7 IKF=0.1371 VAF=52.64 NR=1.019 ISC=2.337E-14 NC=1.164 BR=11.57 IKR=0.1144 VAR=364.5 RB=1 IRB=1.00E-06 RBM=1 RE=0.2598 RC=1 XTB=0 EG=1.11 XTI=3 CJE=1.229E-11 VJE=0.5591 MJE=0.3385 TF=4.689E-10 XTF=160 VTF=2.828 ITF=0.8842 PTF=0 CJC=4.42E-12 VJC=0.1994 MJC=0.2782 XCJC=0.6193 TR=1.00E-32 CJS=0 VJS=0.75 MJS=0.333 FC=0.7936 Vceo=45 Icrating=100m mfg=Philips)
+
+.model BC557B PNP (IS=3.83E-14 NF=1.008 ISE=1.22E-14 NE=1.528 BF=344.4 IKF=0.08039 VAF=21.11 NR=1.005 ISC=2.85E-13 NC=1.28 BR=14.84 IKR=0.047 VAR=32.02 RB=1 IRB=1.00E-06 RBM=1 RE=0.6202 RC=0.5713 XTB=0 EG=1.11 XTI=3 CJE=1.23E-11 VJE=0.6106 MJE=0.378 TF=5.60E-10 XTF=3.414 VTF=5.23 ITF=0.1483 PTF=0 CJC=1.08E-11 VJC=0.1022 MJC=0.3563 XCJC=0.6288 TR=1.00E-32 CJS=0 VJS=0.75 MJS=0.333 FC=0.8027 Vceo=45 Icrating=100m mfg=Philips)
+
+.model BC557C PNP (IS=5.83E-14 NF=1.009 ISE=3.88E-15 NE=1.408 BF=516.7 IKF=0.08039 VAF=26.03 NR=1.006 ISC=4.01E-14 NC=1.313 BR=12.45 IKR=0.07238 VAR=6.717 RB=1 IRB=1.00E-06 RBM=1 RE=0.5685 RC=0.6257 XTB=0 EG=1.11 XTI=3 CJE=1.26E-11 VJE=0.3809 MJE=0.3545 TF=5.23E-10 XTF=4.339 VTF=5.425 ITF=0.1896 PTF=0 CJC=7.80E-12 VJC=0.5897 MJC=0.4569 XCJC=0.6288 TR=1.00E-32 CJS=0 VJS=0.75 MJS=0.333 FC=0.5729 Vceo=45 Icrating=100m mfg=Philips)
+
+.model CA3046 npn ( IS=10.0f XTI=3.0 EG=1.11 VAF=100 VAR=100 BF=145.7 ISE=114.286f NE=1.480 IKF=46.7m XTB=0 BR=0.1 ISC=10.005f NC=2.0 IKR=10m RC=10.0 CJC=991.7f MJC=0.333 VJC=0.75 FC=0.5 CJE=1.02p MJE=0.336 VJE=0.75 TR=10n TF=277.01p ITF=1.75 XTF=309.38 VTF=16.37 PTF=0 RE=0 RB=0 Vceo=20 Icrating=0.1A mfg=Fairchild)
+
+.MODEL CA3096_npn NPN (IS=10.000E-15 BF=466.52 VAF=100 IKF=14.030E-3 ISE=74.093E-15 NE=1.6606 BR=.1001 VAR=100 IKR=10.010E-3 ISC=10.000E-15 NK=.46898 RC=10 CJE=1.2825E-12 MJE=.33333 CJC=786.59E-15 MJC=.33333 TF=490.39E-12 XTF=5.3212 VTF=28.396 ITF=.27408 TR=10.000E-9 Vceo=20 Icrating=0.1A mfg=Fairchild)
+
+.MODEL CA3096_pnp PNP (IS=10.000E-15 BF=94.511 VAF=100 IKF=1.1177E-3 ISE=976.47E-15 NE=1.9980 BR=.1001 VAR=100 IKR=10.010E-3 ISC=10.000E-15 NK=.53243 CJE=1.4535E-12 MJE=.33333 CJC=3.8474E-12 MJC=.33333 TF=24.300E-9 XTF=10.054 VTF=9.7920 ITF=1.2571 TR=10.000E-9 Vceo=20 Icrating=0.1A mfg=Fairchild)
+
+.MODEL TN0104 NMOS (LEVEL=3 RS=0.0205 NSUB=1.0E15 DELTA=0.1 KAPPA=0.0506 TPG=1 CGDO=6.1716E-10 RD=0.239 VTO=1.000 VMAX=1.0E7 ETA=0.0223089 NFS=6.6E10 TOX=1.00E-7 LD=1.698E-9 UO=862.425 XJ=6.4666E-7 THETA=1.0E-5 CGSO=9.10E-9 L=2.5E-6 W=0.9E-2)
+
+.MODEL TN0702 NMOS (LEVEL=3 RS=3.56E-3 NSUB=1.0E15 DELTA=0.1 KAPPA=0.10123 TPG=1 CGDO=8.3432E-10 RD=0.2039 VTO=0.900 VMAX=1.0E7 ETA=0.0223089 NFS=6.6E10 TOX=7E-8 LD=1.698E-9 UO=862.425 XJ=6.4666E-7 THETA=1.0E-5 CGSO=5.21798E-9 L=2.5E-6 W=2.0E-2)
+
+.MODEL LP0701 PMOS (LEVEL=3 RS=0.10 NSUB=1.0E15 DELTA=0.1 KAPPA=0.10123 TPG=-1 CGDO=8.3432E-10 RD=0.350 VTO=-0.50 VMAX=1.0E7 ETA=0.0223089 NFS=6.6E10 TOX=3.5E-8 LD=1.698E-9 UO=862.425 XJ=6.4666E-7 THETA=1.0E-5 CGSO=5.21798E-9 L=3.0E-6 W=3.82E-1 KP=2.6E-6)
+
+.MODEL TP2635 PMOS (LEVEL=3 RS=0.20 NSUB=1.5E15 DELTA=1.0 KAPPA=1.20 TPG=-1 CGDO=1.916E-10 RD=9.5 VTO=-1.10 VMAX=5.0E6 ETA=0.053089 NFS=6.6E10 TOX=750E-10 LD=1.698E-9 UO=862.425 XJ=6.4666E-7 THETA=1.0E-5 CGSO=1.750E-9      L=2.5E-6 W=100E-3 KP=2.5E-6)
+
+.MODEL ALD1106 NMOS (LEVEL=1 CBD=0.5p CBS=0.5p CGDO=0.1p CGSO=0.1p GAMMA=.85 KP=225u LAMBDA=0.029 PHI=.9 VTO=0.7 W=20u L=10u)
+
+.MODEL ALD1107 PMOS (LEVEL=1 CBD=0.5p CBS=0.5p CGDO=0.1p CGSO=0.1p GAMMA=.45 KP=100u LAMBDA=0.0304 PHI=.8 VTO=-0.82 W=20u L=10u)
+
+.MODEL BF245B NJF (VTO=-2.3085 BETA=1.09045m LAMBDA = 23.1754m RD=7.77648 RS=7.77648 IS=2.59121E-016 CGS=2.00000p CGD=2.20000p PB=0.991494 FC=0.5)
+
+

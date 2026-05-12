@@ -1,0 +1,17 @@
+LTspice 26.0.1 for Windows
+Circuit: C:\Users\chris\Documents\GitHub\uni\Semester_3\Elektronik\Labor\0\null.net
+Start Time: Wed Apr  8 11:08:39 2026
+solver = Normal
+Maximum thread count: 16
+tnom = 27
+temp = 27
+method = trap
+Compress1stOrder = true
+Compress2ndOrder = true
+Direct Newton iteration succeeded in finding operating point.
+Total elapsed time: 6.874 seconds.
+
+Files loaded:
+C:\Users\chris\Documents\GitHub\uni\Semester_3\Elektronik\Labor\0\null.net
+C:\Users\chris\AppData\Local\LTspice\lib\cmp\standard.bjt
+

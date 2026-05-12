@@ -1,0 +1,25 @@
+LTspice 26.0.1 for Windows
+Circuit: C:\Users\chris\Documents\GitHub\uni\Semester_3\Elektronik\Labor\1\1_2.net
+Start Time: Thu Apr  9 18:04:28 2026
+solver = Normal
+Maximum thread count: 16
+tnom = 27
+temp = 27
+method = trap
+Compress1stOrder = true
+Compress2ndOrder = true
+C:\Users\chris\Documents\GitHub\uni\Semester_3\Elektronik\Labor\1\1_2.net(3): Missing value, assuming 0V @ DC.
+
+V_BE b 0
+^^^^^^^^
+.step V_BE=0.625 
+.step V_BE=0.65 
+.step V_BE=0.675 
+.step V_BE=0.7 
+.step V_BE=0.7 
+Total elapsed time: 0.306 seconds.
+
+Files loaded:
+C:\Users\chris\Documents\GitHub\uni\Semester_3\Elektronik\Labor\1\1_2.net
+C:\Users\chris\AppData\Local\LTspice\lib\cmp\standard.bjt
+
